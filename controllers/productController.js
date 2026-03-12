@@ -1,11 +1,11 @@
-const Product = require('../models/Product');
+const productService = require('../services/productService');
 
 // @desc    Add a new product
 // @route   POST /products
 // @access  Public
 const addProduct = async (req, res, next) => {
     try {
-        const product = await Product.create(req.body);
+        const product = await productService.createProduct(req.body);
         res.status(201).json({
             success: true,
             message: 'Product added successfully',
@@ -21,7 +21,7 @@ const addProduct = async (req, res, next) => {
 // @access  Public
 const getAllProducts = async (req, res, next) => {
     try {
-        const products = await Product.find();
+        const products = await productService.getAllProducts();
         res.status(200).json({
             success: true,
             count: products.length,
@@ -37,7 +37,7 @@ const getAllProducts = async (req, res, next) => {
 // @access  Public
 const getProductById = async (req, res, next) => {
     try {
-        const product = await Product.findById(req.params.id);
+        const product = await productService.getProductById(req.params.id);
 
         if (!product) {
             const error = new Error(`Product not found with id: ${req.params.id}`);
@@ -59,10 +59,7 @@ const getProductById = async (req, res, next) => {
 // @access  Public
 const updateProduct = async (req, res, next) => {
     try {
-        const product = await Product.findByIdAndUpdate(req.params.id, req.body, {
-            new: true,
-            runValidators: true,
-        });
+        const product = await productService.updateProduct(req.params.id, req.body);
 
         if (!product) {
             const error = new Error(`Product not found with id: ${req.params.id}`);
@@ -85,7 +82,7 @@ const updateProduct = async (req, res, next) => {
 // @access  Public
 const deleteProduct = async (req, res, next) => {
     try {
-        const product = await Product.findByIdAndDelete(req.params.id);
+        const product = await productService.deleteProduct(req.params.id);
 
         if (!product) {
             const error = new Error(`Product not found with id: ${req.params.id}`);
@@ -116,9 +113,7 @@ const searchByName = async (req, res, next) => {
             return next(error);
         }
 
-        const products = await Product.find({
-            productName: { $regex: name, $options: 'i' },
-        });
+        const products = await productService.searchByName(name);
 
         res.status(200).json({
             success: true,
@@ -143,9 +138,7 @@ const filterByCategory = async (req, res, next) => {
             return next(error);
         }
 
-        const products = await Product.find({
-            category: { $regex: cat, $options: 'i' },
-        });
+        const products = await productService.filterByCategory(cat);
 
         res.status(200).json({
             success: true,
