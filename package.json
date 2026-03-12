@@ -1,0 +1,13 @@
+{
+  "name": "store-management-backend",
+  "version": "1.0.0",
+  "description": "Store Inventory Management System - REST API using Node.js, Express, and MongoDB",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "keywords": ["store", "inventory", "management", "express", "mongodb"],
+  "author": "",
+  "license": "ISC"
+}
