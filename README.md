@@ -50,9 +50,11 @@ store-management-backend/
    ```
 
 3. **Configure environment variables:**
-   Create a `.env` file in the root directory:
+   Create a `.env` file in the root directory (or copy the example):
+   ```env
    PORT=5000
    MONGO_URI=mongodb+srv://<username>:<password>@cluster0.mongodb.net/storeDB?retryWrites=true&w=majority
+   ```
 
    Instead of committing secrets to version control, copy `.env.example` to `.env` and fill in real values:
    ```bash
@@ -66,8 +68,9 @@ store-management-backend/
    ```bash
    # Development (with auto-reload)
    npm run dev
-    This repository includes a minimal frontend at `client/` for quick demos. It is served by the Express app when `SERVE_CLIENT=true`.
    ```
+
+   This repository includes a minimal frontend at `client/` for quick demos. It is served by the Express app when `SERVE_CLIENT=true`.
 
 ---
 
@@ -131,9 +134,30 @@ store-management-backend/
 5. Deploy and verify your service health at the root endpoint `/`.
 
 Notes:
-- This repository currently contains only the backend API (no frontend). You'll need a separate frontend app or static site to serve the UI.
+- This repository includes a minimal frontend at `client/` for quick demos. It is served by the Express app when `SERVE_CLIENT=true`.
 - Ensure `MONGO_URI` secrets are stored in Render's environment variables (or GitHub Secrets for CI). Do NOT commit credentials.
-- Rotate any database credentials that were exposed locally in your `.env` file.
+- Rotate any database credentials that were exposed locally in your `.env` file (see below).
+
+### Credential rotation (MongoDB Atlas)
+
+1. Log in to MongoDB Atlas.
+2. Go to **Database Access** → **Add New Database User**. Create a new user with a strong password and the required roles.
+3. Update your `MONGO_URI` with the new user's credentials.
+4. Remove or revoke the old user from **Database Access**.
+5. Update Render environment variables (Service → Environment → Add/Edit `MONGO_URI`) with the new connection string.
+
+### Docker & Render
+
+- Build locally with Docker:
+   ```bash
+   docker build -t store-backend:latest .
+   docker run -e MONGO_URI="your_mongo_uri" -p 5000:5000 store-backend:latest
+   ```
+- Render manifest is included as `render.yaml` for quick connect-and-deploy. Configure `MONGO_URI` in the Render Dashboard.
+
+### CI
+
+- A GitHub Actions workflow `.github/workflows/ci.yml` runs on push/PR and performs install, lint, and tests.
 
 ---
 

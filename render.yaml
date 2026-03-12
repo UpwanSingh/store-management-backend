@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: store-management-backend
+    env: node
+    plan: free
+    repo: https://github.com/UpwanSingh/store-management-backend
+    branch: master
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: MONGO_URI
+        value: $MONGO_URI
+      - key: SERVE_CLIENT
+        value: "true"
