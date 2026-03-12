@@ -120,8 +120,24 @@ store-management-backend/
 
 ## 🚀 Deployment
 
-- **GitHub:** [Repository Link]
-- **Render:** [Live API URL]
+- **GitHub:** https://github.com/UpwanSingh/store-management-backend
+
+### Deploying to Render (Backend only)
+
+1. Push your code to GitHub (already done).
+2. On Render, create a new **Web Service** and connect your GitHub repo.
+   - Build command: `npm install`
+   - Start command: `npm start`
+3. In the Render Dashboard, add environment variables (do NOT commit secrets):
+   - `MONGO_URI` — your MongoDB connection string
+   - `PORT` — optional (Render sets one automatically)
+4. Provision a MongoDB instance (use MongoDB Atlas or Render Managed Database) and set `MONGO_URI` accordingly.
+5. Deploy and verify your service health at the root endpoint `/`.
+
+Notes:
+- This repository currently contains only the backend API (no frontend). You'll need a separate frontend app or static site to serve the UI.
+- Ensure `MONGO_URI` secrets are stored in Render's environment variables (or GitHub Secrets for CI). Do NOT commit credentials.
+- Rotate any database credentials that were exposed locally in your `.env` file.
 
 ---
 
