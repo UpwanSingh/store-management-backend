@@ -56,6 +56,14 @@ store-management-backend/
    MONGO_URI=mongodb+srv://<username>:<password>@cluster0.mongodb.net/storeDB?retryWrites=true&w=majority
    ```
 
+   Instead of committing secrets to version control, copy `.env.example` to `.env` and fill in real values:
+   ```bash
+   cp .env.example .env
+   # edit .env and set MONGO_URI and other secrets
+   ```
+
+   Keep `.env` out of git (already in `.gitignore`). If you need to share config, commit `.env.example` with placeholder values only.
+
 4. **Start the server:**
    ```bash
    # Development (with auto-reload)
