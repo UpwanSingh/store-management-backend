@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Store Inventory - UI</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Store Inventory</h1>
+
+      <section id="add">
+        <h2>Add Product</h2>
+        <form id="productForm">
+          <input name="productName" placeholder="Product name" required />
+          <input name="productCode" placeholder="Code" required />
+          <input name="category" placeholder="Category" required />
+          <input name="supplierName" placeholder="Supplier" required />
+          <input name="quantityInStock" type="number" placeholder="Quantity" required />
+          <input name="reorderLevel" type="number" placeholder="Reorder Level" required />
+          <input name="unitPrice" type="number" step="0.01" placeholder="Unit Price" required />
+          <select name="productType">
+            <option value="Non-Perishable">Non-Perishable</option>
+            <option value="Perishable">Perishable</option>
+          </select>
+          <button type="submit">Add</button>
+        </form>
+      </section>
+
+      <section id="list">
+        <h2>Products</h2>
+        <div id="products"></div>
+      </section>
+    </div>
+
+    <script src="/app.js"></script>
+  </body>
+</html>

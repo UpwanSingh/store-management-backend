@@ -51,10 +51,8 @@ store-management-backend/
 
 3. **Configure environment variables:**
    Create a `.env` file in the root directory:
-   ```env
    PORT=5000
    MONGO_URI=mongodb+srv://<username>:<password>@cluster0.mongodb.net/storeDB?retryWrites=true&w=majority
-   ```
 
    Instead of committing secrets to version control, copy `.env.example` to `.env` and fill in real values:
    ```bash
@@ -68,9 +66,7 @@ store-management-backend/
    ```bash
    # Development (with auto-reload)
    npm run dev
-
-   # Production
-   npm start
+    This repository includes a minimal frontend at `client/` for quick demos. It is served by the Express app when `SERVE_CLIENT=true`.
    ```
 
 ---
